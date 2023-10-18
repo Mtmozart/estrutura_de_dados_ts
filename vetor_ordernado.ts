@@ -28,11 +28,11 @@ class VetorOrdenado {
 
       for (let i = 0; i <= this.ultima_posicao; i++) {
         posicao = i;
-        if (this.valores[i] < value) {
+        if (this.valores[i] > value) {
           break;
         }
       }
-
+      //isso aqui decrementa
       let x = this.ultima_posicao;
       while (x >= posicao) {
         this.valores[x + 1] = this.valores[x];
@@ -41,11 +41,29 @@ class VetorOrdenado {
       this.valores[posicao] = value;
     }
   }
+
+  pesquisar(value: number): void {
+    let valorEncontrado = false;
+    for (let i = 0; i <= this.ultima_posicao; i++) {
+      if (this.valores[i] == value) {
+        console.log(this.valores[i]);
+        valorEncontrado = true;
+        break;
+      }
+    }
+    if (!valorEncontrado) {
+      console.log("value not found");
+    }
+  }
 }
 
-const vetorOrdenado = new VetorOrdenado(5);
+const vetorOrdenado = new VetorOrdenado(6);
 vetorOrdenado.inserir(5);
 vetorOrdenado.inserir(6);
 vetorOrdenado.inserir(4);
 vetorOrdenado.inserir(1);
+vetorOrdenado.inserir(45);
+vetorOrdenado.inserir(999999);
+
 vetorOrdenado.imprime();
+vetorOrdenado.pesquisar(999999);
