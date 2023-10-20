@@ -42,18 +42,36 @@ class VetorOrdenado {
     }
   }
 
-  pesquisar(value: number): void {
+  pesquisar(value: number): number {
     let valorEncontrado = false;
-    for (let i = 0; i <= this.ultima_posicao; i++) {
+    for (let i: number = 0; i <= this.ultima_posicao; i++) {
       if (this.valores[i] == value) {
         console.log(this.valores[i]);
         valorEncontrado = true;
-        break;
+        return i;
       }
     }
+    let a: number = 0;
     if (!valorEncontrado) {
       console.log("value not found");
+      a = -1;
     }
+    return a;
+  }
+
+  excluir(value): boolean {
+    let posicao: number = vetorOrdenado.pesquisar(value);
+    if (posicao == -1) {
+      console.log("valor não encontrado");
+      return false;
+    }
+
+    for (let i = posicao; i < this.ultima_posicao; ++i) {
+      this.valores[i] = this.valores[i + 1];
+    }
+    this.ultima_posicao -= 1;
+    console.log("valo removido");
+    return true;
   }
 }
 
@@ -66,4 +84,6 @@ vetorOrdenado.inserir(45);
 vetorOrdenado.inserir(999999);
 
 vetorOrdenado.imprime();
-vetorOrdenado.pesquisar(999999);
+vetorOrdenado.pesquisar(46);
+vetorOrdenado.excluir(1);
+vetorOrdenado.imprime();
